@@ -1,52 +1,122 @@
 package com.zhangpeng.administrator.smarthome;
 
+
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity {
+import com.zhangpeng.administrator.smarthome.device.DeviceFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
+    //主要要继承自FragmentActivity,这样才能在初始适配器类是使用getSupportFragmentManager方法获取FragmentManager对象
+    private ViewPager mViewPager;
+    private List<Fragment> datas;
+    private ViewPagerFragmentAdapter viewPagerFragmentAdapter;
+    private LinearLayout mLLChat,mLLFrd,mLLFind,mLLMe;
+    private ImageView mImageViewChat,mImageViewFrd,mImageViewFind,mImageViewMe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initDatas();//初始化数据集
+        initView();// 初始化控件
+        initEvent();// 注册单击监听
+        viewPagerFragmentAdapter=new ViewPagerFragmentAdapter(getSupportFragmentManager(),datas);//初始化适配器类
+        mViewPager.setAdapter(viewPagerFragmentAdapter);
+    }
+    private void initDatas() {
+        datas=new ArrayList<Fragment>();
+        datas.add(new DeviceFragment());
+        datas.add(new MyFragment2());
+        datas.add(new MyFragment3());
+        datas.add(new MyFragment4());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+    }
+    private void initEvent() {
+        mLLChat.setOnClickListener(this);
+        mLLFrd.setOnClickListener(this);
+        mLLFind.setOnClickListener(this);
+        mLLMe.setOnClickListener(this);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {//ViewPager滑动切换监听
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onPageSelected(int arg0) {
+                int currentItem=mViewPager.getCurrentItem();
+                resetImag();
+                switch (currentItem) {
+                    case 0:
+                        mImageViewChat.setImageResource(R.drawable.splash);
+                        break;
+                    case 1:
+                        mImageViewFrd.setImageResource(R.drawable.splash);
+                        break;
+                    case 2:
+                        mImageViewFind.setImageResource(R.drawable.splash);
+                        break;
+                    case 3:
+                        mImageViewMe.setImageResource(R.drawable.splash);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+            }
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+
             }
         });
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    private void initView() {
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mLLChat = (LinearLayout) findViewById(R.id.ll_chat);
+        mLLFrd = (LinearLayout) findViewById(R.id.ll_frd);
+        mLLFind = (LinearLayout) findViewById(R.id.ll_find);
+        mLLMe = (LinearLayout) findViewById(R.id.ll_me);
+        mImageViewChat = (ImageView) findViewById(R.id.img_chat);
+        mImageViewFrd = (ImageView) findViewById(R.id.img_frd);
+        mImageViewFind = (ImageView) findViewById(R.id.img_find);
+        mImageViewMe = (ImageView) findViewById(R.id.img_me);
     }
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public void onClick(View v) {
+        resetImag();
+        switch (v.getId()) {
+            case R.id.ll_chat:
+                mViewPager.setCurrentItem(0);
+                mImageViewChat.setImageResource(R.drawable.splash);
+                break;
+            case R.id.ll_frd:
+                mViewPager.setCurrentItem(1);
+                mImageViewFrd.setImageResource(R.drawable.splash);
+                break;
+            case R.id.ll_find:
+                mViewPager.setCurrentItem(2);
+                mImageViewFind.setImageResource(R.drawable.splash);
+                break;
+            case R.id.ll_me:
+                mViewPager.setCurrentItem(3);
+                mImageViewMe.setImageResource(R.drawable.splash);
+                break;
+            default:
+                break;
         }
-
-        return super.onOptionsItemSelected(item);
+    }
+    private void resetImag() {//重置图片
+        mImageViewChat.setImageResource(R.drawable.splash_no);
+        mImageViewFrd.setImageResource(R.drawable.splash_no);
+        mImageViewFind.setImageResource(R.drawable.splash_no);
+        mImageViewMe.setImageResource(R.drawable.splash_no);
     }
 }

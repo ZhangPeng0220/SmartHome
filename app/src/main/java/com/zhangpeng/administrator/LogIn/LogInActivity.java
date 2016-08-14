@@ -1,4 +1,4 @@
-package com.zhangpeng.administrator.smarthome;
+package com.zhangpeng.administrator.LogIn;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.zhangpeng.administrator.smarthome.MainActivity;
+import com.zhangpeng.administrator.smarthome.R;
 
 public class LogInActivity extends AppCompatActivity {
     Button login;
@@ -109,14 +112,18 @@ public class LogInActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         SQLcheck check = new SQLcheck(name,password,LogInActivity.this);
         Boolean flag = check.authenticate();
-        if(flag){
+        /*if(flag){
             login.setEnabled(true);
             Intent intent = new Intent(LogInActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
         }else {
             Toast.makeText(LogInActivity.this,"用户名不存在",Toast.LENGTH_SHORT).show();
-        }
+        }*/
+        login.setEnabled(true);
+        Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
 
 
     }

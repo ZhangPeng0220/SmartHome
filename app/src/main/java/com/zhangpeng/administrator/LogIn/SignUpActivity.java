@@ -1,4 +1,4 @@
-package com.zhangpeng.administrator.smarthome;
+package com.zhangpeng.administrator.LogIn;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.zhangpeng.administrator.smarthome.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="#ffffffff"
+    android:orientation="horizontal" >
+    <LinearLayout
+        android:id="@+id/ll_chat"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/img_chat"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#0000"
+            android:src="@drawable/splash" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信"
+            android:textColor="#b6b3b3" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_frd"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/img_frd"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#0000"
+            android:src="@drawable/splash" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通讯录"
+            android:textColor="#b6b3b3" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_find"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/img_find"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#0000"
+            android:src="@drawable/splash" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发现"
+            android:textColor="#b6b3b3" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_me"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/img_me"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#0000"
+            android:src="@drawable/splash" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我"
+            android:textColor="#b6b3b3" />
+    </LinearLayout>
+</LinearLayout>
