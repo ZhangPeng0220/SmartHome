@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.zhangpeng.administrator.smarthome.R;
 import com.zhangpeng.administrator.smarthome.device.voice.VoiceActivity;
@@ -38,8 +40,20 @@ import com.zhangpeng.administrator.smarthome.device.voice.VoiceActivity;
                 public void onClick(View view) {
                     Intent intent = new Intent(getContext(), VoiceActivity.class);
                     startActivity(intent);
+                }
+            });
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                    Log.d("neng","fou");
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String result = String.valueOf(position);
+                    if(position == 1){
+                        Intent intent = new Intent(getContext(),AirControlActivity.class);
+                        startActivity(intent);
+                    }
+
+
                 }
             });
             return view;

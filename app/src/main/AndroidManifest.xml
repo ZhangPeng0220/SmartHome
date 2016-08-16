@@ -52,6 +52,10 @@
         <activity
             android:name=".device.voice.VoiceActivity"
             android:label="@string/title_activity_voice"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".device.AirControlActivity"
+            android:label="@string/title_activity_air_control"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
