@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 // TODO Auto-generated method stub
                 //要做的事情
-                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this,LogInActivity.class);
                 startActivity(intent);
                 finish();
                 //handler.postDelayed(this, 2000);

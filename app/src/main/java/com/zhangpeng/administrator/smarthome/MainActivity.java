@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.zhangpeng.administrator.smarthome.device.DeviceFragment;
+import com.zhangpeng.administrator.smarthome.scene.SceneFragment;
+import com.zhangpeng.administrator.smarthome.scene.SceneFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ViewPager mViewPager;
     private List<Fragment> datas;
     private ViewPagerFragmentAdapter viewPagerFragmentAdapter;
-    private LinearLayout mLLChat,mLLFrd,mLLFind,mLLMe;
-    private ImageView mImageViewChat,mImageViewFrd,mImageViewFind,mImageViewMe;
+    private LinearLayout mLLChat,mLLFrd,mLLFind;
+    private ImageView mImageViewChat,mImageViewFrd,mImageViewFind;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,16 +38,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void initDatas() {
         datas=new ArrayList<Fragment>();
         datas.add(new DeviceFragment());
-        datas.add(new MyFragment2());
+        datas.add(new SceneFragment());
         datas.add(new MyFragment3());
-        datas.add(new MyFragment4());
+
 
     }
     private void initEvent() {
         mLLChat.setOnClickListener(this);
         mLLFrd.setOnClickListener(this);
         mLLFind.setOnClickListener(this);
-        mLLMe.setOnClickListener(this);
+
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {//ViewPager滑动切换监听
             @Override
             public void onPageSelected(int arg0) {
@@ -60,9 +62,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         break;
                     case 2:
                         mImageViewFind.setImageResource(R.drawable.splash);
-                        break;
-                    case 3:
-                        mImageViewMe.setImageResource(R.drawable.splash);
                         break;
                     default:
                         break;
@@ -83,11 +82,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mLLChat = (LinearLayout) findViewById(R.id.ll_chat);
         mLLFrd = (LinearLayout) findViewById(R.id.ll_frd);
         mLLFind = (LinearLayout) findViewById(R.id.ll_find);
-        mLLMe = (LinearLayout) findViewById(R.id.ll_me);
         mImageViewChat = (ImageView) findViewById(R.id.img_chat);
         mImageViewFrd = (ImageView) findViewById(R.id.img_frd);
         mImageViewFind = (ImageView) findViewById(R.id.img_find);
-        mImageViewMe = (ImageView) findViewById(R.id.img_me);
+
     }
     @Override
     public void onClick(View v) {
@@ -105,10 +103,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 mViewPager.setCurrentItem(2);
                 mImageViewFind.setImageResource(R.drawable.splash);
                 break;
-            case R.id.ll_me:
-                mViewPager.setCurrentItem(3);
-                mImageViewMe.setImageResource(R.drawable.splash);
-                break;
             default:
                 break;
         }
@@ -117,6 +111,5 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mImageViewChat.setImageResource(R.drawable.splash_no);
         mImageViewFrd.setImageResource(R.drawable.splash_no);
         mImageViewFind.setImageResource(R.drawable.splash_no);
-        mImageViewMe.setImageResource(R.drawable.splash_no);
     }
 }

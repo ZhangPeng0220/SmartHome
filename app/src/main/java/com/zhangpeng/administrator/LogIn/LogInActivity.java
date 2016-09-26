@@ -14,10 +14,16 @@ import android.widget.Toast;
 import com.zhangpeng.administrator.smarthome.MainActivity;
 import com.zhangpeng.administrator.smarthome.R;
 
+import org.json.JSONArray;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
+
 public class LogInActivity extends AppCompatActivity {
     Button login;
-    EditText _emailText;
     EditText _passwordText;
+    EditText _emailText;
     TextView signUp;
     String name;
     String password;
@@ -26,7 +32,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
         login = (Button)findViewById(R.id.btn_login);
-        _emailText =(EditText) findViewById(R.id.input_email);
+        _emailText = (EditText) findViewById(R.id.input_email);
         _passwordText = (EditText) findViewById(R.id.input_password);
         signUp = (TextView) findViewById(R.id.link_signup);
         login.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +81,25 @@ public class LogInActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
+                        BmobQuery query =new BmobQuery("Account");
+                        query.addWhereEqualTo("name", name);
+                        query.setLimit(2);
+                        query.order("createdAt");
+                        //v3.5.0版本提供`findObjectsByTable`方法查询自定义表名的数据
+                        query.findObjectsByTable(new QueryListener<JSONArray>() {
+                            @Override
+                            public void done(JSONArray ary, BmobException e) {
+                                if(e==null){
+                                    Log.i("bmob","查询成功："+ary.toString());
+                                    onLoginSuccess();
+                                    progressDialog.dismiss();
+                                }else{
+                                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                                    onLoginFailed();
+                                }
+                            }
+                        });
+
                     }
                 }, 3000);
         Log.d("login","正在进入");
@@ -89,38 +110,26 @@ public class LogInActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+        if (email.isEmpty()) {
+            _emailText.setError("请输入用户名");
             valid = false;
         } else {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() ) {
+            _passwordText.setError("请输入密码");
             valid = false;
         } else {
             _passwordText.setError(null);
         }
-        Log.d("login","判断");
         return valid;
     }
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-        login.setEnabled(true);
     }
     public void onLoginSuccess() {
-        SQLcheck check = new SQLcheck(name,password,LogInActivity.this);
-        Boolean flag = check.authenticate();
-        /*if(flag){
-            login.setEnabled(true);
-            Intent intent = new Intent(LogInActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }else {
-            Toast.makeText(LogInActivity.this,"用户名不存在",Toast.LENGTH_SHORT).show();
-        }*/
-        login.setEnabled(true);
+
         Intent intent = new Intent(LogInActivity.this,MainActivity.class);
         startActivity(intent);
         finish();

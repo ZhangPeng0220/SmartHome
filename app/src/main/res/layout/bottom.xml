@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="微信"
+            android:text="设备"
             android:textColor="#b6b3b3" />
     </LinearLayout>
     <LinearLayout
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="通讯录"
+            android:text="场景"
             android:textColor="#b6b3b3" />
     </LinearLayout>
     <LinearLayout
@@ -58,26 +58,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="发现"
+            android:text="个人中心"
             android:textColor="#b6b3b3" />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_me"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical" >
-        <ImageView
-            android:id="@+id/img_me"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="#0000"
-            android:src="@drawable/splash" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我"
-            android:textColor="#b6b3b3" />
-    </LinearLayout>
+
 </LinearLayout>

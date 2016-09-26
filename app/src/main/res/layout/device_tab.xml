@@ -9,7 +9,7 @@
         android:id="@+id/layout_titlebar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="#ed4255" >
+        android:background="#FF6347" >
 
         <TextView
             android:id="@+id/text_title"
@@ -17,7 +17,6 @@
             android:layout_height="match_parent"
             android:ellipsize="marquee"
             android:gravity="center_horizontal|center"
-            android:singleLine="true"
             android:text="全部设备"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
